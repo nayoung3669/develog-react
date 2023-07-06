@@ -1,12 +1,12 @@
 const colors = {
   ivory: "#f4f3ee",
   lightgray: "#bcb8b1",
-  pink: "#e0afa0",
-  brown: "#8a817c",
-  dark: "#463f3a",
+  pink: "#eccec5",
+  brown: "#94908f",
+  dark: "#575757",
 };
 
-//자주 사용하는 display - flex
+//자주 사용하는 display
 const common = {
   flexCenter: `
     display: flex;
