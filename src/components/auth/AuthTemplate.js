@@ -5,12 +5,12 @@ import theme from "../../lib/styles/theme";
 const AuthTemplate = ({ children }) => {
   return (
     <AuthTemplateBlock>
-      <WhiteBox>
+      <ContentBox>
         <div className="logoText">
           <Link to="/">MELOG</Link>
         </div>
-      </WhiteBox>
-      {children}
+        {children}
+      </ContentBox>
     </AuthTemplateBlock>
   );
 };
@@ -27,4 +27,36 @@ const AuthTemplateBlock = styled.div`
   background: ${theme.colors.ivory};
   ${theme.common.flexCenterColumn}
 `;
-const WhiteBox = styled.div``;
+const ContentBox = styled.div`
+  width: 360px;
+  height: 600px;
+  margin: auto;
+  background: white;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+
+  border: 0.8px solid #24242431;
+  display: block;
+  position: relative;
+  cursor: pointer;
+
+  &:hover:before {
+    border-top: 32px solid #7373734f;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 32px solid ${theme.colors.pink};
+    border-left: 32px solid rgba(0, 0, 0, 0);
+    width: 0;
+  }
+
+  .logoText {
+    ${theme.common.flexCenterColumn}
+    margin-top: 30px;
+    font-size: 2rem;
+  }
+`;
