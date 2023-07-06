@@ -1,13 +1,16 @@
 import { styled } from "styled-components";
 import theme from "../lib/styles/theme";
 
-const Input = ({ children, w, h, ph }) => {
+const Input = ({ children, w, h, ph, name, value, onChange }) => {
   return (
     <StyledInput
       w={w}
       h={h}
       placeholder={`${ph}`}
-      type={ph === "PW" && "password"}>
+      type={ph === "PW" && "password"}
+      name={name}
+      value={value}
+      onChange={onChange}>
       {children}
     </StyledInput>
   );

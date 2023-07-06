@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
 import theme from "../lib/styles/theme";
 
-const Button = ({ children, w, h }) => {
+const Button = ({ children, w, h, onClick }) => {
   return (
-    <StyledButton w={w} h={h}>
+    <StyledButton w={w} h={h} onClick={onClick}>
       {children}
     </StyledButton>
   );
