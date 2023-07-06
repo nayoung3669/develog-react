@@ -1,15 +1,24 @@
 import { useState } from "react";
 import AuthForm from "../../components/auth/AuthForm";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { signup } from "../../api/api";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     id: "",
     password: "",
   });
-  //   const { isLoading, isError, data } = useQuery("user", signup(formData));
-  const [checkPW, setCheckPW] = useState("");
+  const mutation = useMutation(signup, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("signup");
+      navigate("/");
+    },
+    onError: (e) => console.log(e),
+  });
+  //   const [checkPW, setCheckPW] = useState("");
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -18,15 +27,14 @@ const RegisterForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (formData.id)
-      //mutate
-      setFormData({ ...formData, id: "", password: "" });
+    mutation.mutate(formData);
+    setFormData({ ...formData, id: "", password: "" });
   };
 
   return (
     <div>
       <AuthForm
-        type="login"
+        type="register"
         formData={formData}
         onChange={onChange}
         onSubmit={onSubmit}

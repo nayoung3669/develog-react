@@ -1,9 +1,7 @@
-import { useState } from "react";
 import AuthForm from "../../components/auth/AuthForm";
-import { useMutation, useQuery } from "react-query";
 
 const LoginForm = () => {
-  return <AuthForm type="register" />;
+  return <AuthForm type="login" />;
 };
 
 export default LoginForm;
