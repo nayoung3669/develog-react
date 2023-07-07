@@ -7,7 +7,9 @@ const AuthTemplate = ({ children }) => {
     <AuthTemplateBlock>
       <ContentBox>
         <div className="logoText">
-          <Link to="/">MELOG</Link>
+          <Link to="/">
+            {"<"}DEVLOG{"/>"}
+          </Link>
         </div>
         {children}
       </ContentBox>
@@ -33,15 +35,13 @@ const ContentBox = styled.div`
   margin: auto;
   background: white;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
+  border-radius: 6px;
 
   border: 0.8px solid #24242431;
-  display: block;
   position: relative;
-  cursor: pointer;
 
   &:hover:before {
-    border-top: 32px solid #7373734f;
+    border-top: 35px solid #1d1d1d4f;
   }
 
   &:before {
@@ -49,9 +49,9 @@ const ContentBox = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    border-top: 32px solid ${theme.colors.pink};
-    border-left: 32px solid rgba(0, 0, 0, 0);
-    width: 0;
+    border-top: 35px solid ${theme.colors.pink};
+    border-left: 35px solid rgba(0, 0, 0, 0);
+    width: ;
   }
 
   .logoText {

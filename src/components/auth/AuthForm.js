@@ -3,10 +3,21 @@ import theme from "../../lib/styles/theme";
 import { Button, Input } from "../../common";
 import { Link } from "react-router-dom";
 
-const AuthForm = ({ type, formData, onChange, onSubmit }) => {
+const AuthForm = ({
+  typeName,
+  formData,
+  onChange,
+  checkPW,
+  onConfirm,
+  onSubmit,
+}) => {
   return (
     <AuthFormBlock>
-      <div className="typeText">{type.toUpperCase()}</div>
+      <div className="typeText">
+        {typeName === "login"
+          ? `${typeName.toUpperCase()}`
+          : "Welcome to DEVLOG!"}
+      </div>
       <div className="inputs">
         <Input
           className="input"
@@ -26,14 +37,21 @@ const AuthForm = ({ type, formData, onChange, onSubmit }) => {
           value={formData.password}
           onChange={onChange}
         />
-        {type === "register" && (
-          <Input className="input" ph="PW" w="90%" h="50px" />
+        {typeName === "register" && (
+          <Input
+            className="input"
+            ph="PW"
+            w="90%"
+            h="50px"
+            value={checkPW}
+            onChange={onConfirm}
+          />
         )}
       </div>
       <Button w="185" h="40" onClick={onSubmit}>
-        {type}
+        {typeName.toUpperCase() + `${" >"}`}
       </Button>
-      {type === "login" && (
+      {typeName === "login" && (
         <Link to={`/register`} className="register">
           REGISTER {">"}
         </Link>

@@ -1,15 +1,19 @@
 import axios from "axios";
 
 export const signup = async (newUser) => {
-  try {
-    console.log(newUser);
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/register`,
-      newUser,
-    );
-    console.log(response.data);
-    return response.data;
-  } catch (e) {
-    console.log(e);
-  }
+  const response = await axios.post(
+    `${process.env.REACT_APP_SERVER_URL}/register`,
+    newUser,
+  );
+  return response;
 };
+
+export const signin = async (userData) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_SERVER_URL}/login`,
+    userData,
+  );
+  return response;
+};
+
+//baseURL
