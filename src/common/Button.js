@@ -1,9 +1,9 @@
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import theme from "../lib/styles/theme";
 
-const Button = ({ children, w, h, onClick }) => {
+const Button = ({ children, w, h, c, onClick }) => {
   return (
-    <StyledButton w={w} h={h} onClick={onClick}>
+    <StyledButton w={w} h={h} c={c} onClick={onClick}>
       {children}
     </StyledButton>
   );
@@ -21,6 +21,13 @@ const StyledButton = styled.button`
   color: ${theme.colors.dark};
   background: ${theme.colors.pink};
   cursor: pointer;
+
+  ${(props) =>
+    props.c === "dark" &&
+    css`
+      background: ${theme.colors.dark};
+      color: ${theme.colors.ivory};
+    `};
 
   &:hover {
     color: ${theme.colors.ivory};

@@ -35,8 +35,13 @@ const RegisterForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    //유효성검사
     if (checkPW !== formData.password) {
       alert("비밀번호가 다릅니다.");
+      return;
+    }
+    if (formData.id === "" || formData.password === "") {
+      alert("정보를 모두 입력해주세요.");
       return;
     }
     if (

@@ -1,5 +1,12 @@
+import Header from "../components/common/Header";
+
 const PostListPage = () => {
-  return <div>PostListPage</div>;
+  return (
+    <div>
+      <Header />
+      <div>sdfsdf</div>
+    </div>
+  );
 };
 
 export default PostListPage;
