@@ -34,16 +34,16 @@ const Editor = () => {
 export default Editor;
 
 const EditorBlock = styled.div`
-  margin: 20px 40px 10px 40px;
+  margin: 20px 40px 30px 40px;
   .ql-editor {
-    min-height: 380px;
+    min-height: 550px;
   }
   .ql-editor.ql-blank::before {
     left: 20px;
   }
   input {
-    padding-left: 12px;
+    padding-left: 14px;
     font-size: 1.7rem;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
 `;

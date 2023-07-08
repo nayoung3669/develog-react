@@ -43,7 +43,7 @@ const TagBox = () => {
           value={inputTag}
           onChange={onChangeHandler}
         />
-        <Button w="43" h="30" onClick={onSubmitHandler}>
+        <Button w="43" h="40" onClick={onSubmitHandler}>
           추가
         </Button>
       </TagFormBlock>
@@ -78,8 +78,8 @@ const TagFormBlock = styled.div`
   position: relative;
 
   input {
-    height: 30px;
-    width: 130px;
+    height: 40px;
+    width: 180px;
     border: 1px solid lightgray;
   }
   button {

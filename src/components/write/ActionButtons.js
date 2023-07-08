@@ -8,7 +8,9 @@ const ActionButtons = () => {
       <Button c="dark" h="35" w="90">
         작성완료
       </Button>
-      <Button h="35">취소</Button>
+      <Button h="35" w="65">
+        취소
+      </Button>
     </ActionButtonsBlock>
   );
 };
@@ -17,8 +19,8 @@ export default ActionButtons;
 
 const ActionButtonsBlock = styled.div`
   ${theme.common.flexCenter}
-  margin: 20px 40px;
+  margin: 40px 40px;
   button {
-    margin-right: 5px;
+    margin-right: 15px;
   }
 `;
