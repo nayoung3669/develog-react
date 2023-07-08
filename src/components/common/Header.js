@@ -1,12 +1,20 @@
 import { styled } from "styled-components";
 import theme from "../../lib/styles/theme";
 import { Button } from "../../common";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate("/");
+  };
   return (
     <>
       <HeaderBlock>
-        <div className="logoText">DEVLOG</div>
+        <div className="logoText" onClick={onClick}>
+          DEVLOG
+        </div>
         <Button w="80" h="30" c="dark">
           LOGOUT
         </Button>
@@ -33,6 +41,7 @@ const HeaderBlock = styled.div`
     font-size: 1.7rem;
     font-weight: bold;
     letter-spacing: 3px;
+    cursor: pointer;
   }
 
   button {

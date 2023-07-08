@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import theme from "../lib/styles/theme";
 
-const Input = ({ children, w, h, ph, name, value, onChange }) => {
+const Input = ({ w, h, ph, name, value, onChange }) => {
   return (
     <StyledInput
       w={w}
@@ -10,9 +10,8 @@ const Input = ({ children, w, h, ph, name, value, onChange }) => {
       type={ph === "PW" && "password"}
       name={name}
       value={value}
-      onChange={onChange}>
-      {children}
-    </StyledInput>
+      onChange={onChange}
+    />
   );
 };
 
