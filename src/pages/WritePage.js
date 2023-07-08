@@ -1,5 +1,13 @@
+import Header from "../components/common/Header";
+import Editor from "../components/write/Editor";
+
 const WritePage = () => {
-  return <div>WritePage</div>;
+  return (
+    <div>
+      <Header />
+      <Editor />
+    </div>
+  );
 };
 
 export default WritePage;
