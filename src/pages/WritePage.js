@@ -1,13 +1,13 @@
 import Header from "../components/common/Header";
 import ActionButtons from "../components/write/ActionButtons";
-import Editor from "../components/write/Editor";
 import TagBox from "../components/write/TagBox";
+import EditorContainer from "../containers/write/EditorContainer";
 
 const WritePage = () => {
   return (
     <div>
       <Header />
-      <Editor />
+      <EditorContainer />
       <TagBox />
       <ActionButtons />
     </div>

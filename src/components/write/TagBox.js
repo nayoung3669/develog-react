@@ -41,8 +41,7 @@ const TagBox = () => {
           name="input"
           placeholder="태그를 입력하세요."
           value={inputTag}
-          onChange={onChangeHandler}
-        />
+          onChange={onChangeHandler}></input>
         <Button w="43" h="40" onClick={onSubmitHandler}>
           추가
         </Button>
@@ -73,18 +72,16 @@ const TagBoxBlock = styled.div`
 `;
 
 const TagFormBlock = styled.div`
-  ${theme.common.flexCenter}
+  /* ${theme.common.flexCenter} */
   margin-top: 10px;
-  position: relative;
 
   input {
     height: 40px;
-    width: 180px;
+    width: 150px;
     border: 1px solid lightgray;
   }
   button {
     position: absolute;
-    left: 15%;
     border-radius: 0px;
     border: 1px solid lightgray;
   }
