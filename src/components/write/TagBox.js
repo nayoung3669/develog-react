@@ -3,7 +3,7 @@ import { Button } from "../../common";
 import theme from "../../lib/styles/theme";
 import { useCallback, useState } from "react";
 
-const TagBox = () => {
+const TagBox = ({ tagsData, onChangeTagsData }) => {
   const [inputTag, setInputTag] = useState("");
   const [tags, setTags] = useState([]);
 
@@ -20,13 +20,15 @@ const TagBox = () => {
         return;
       }
       if (tags.includes(inputTag)) {
-        alert("이미 존재하는 태그입니다.");
+        alert("이미 입력한 태그입니다.");
         return;
       }
       setTags((prev) => prev.concat(inputTag));
+      onChangeTagsData({ key: "tags", value: tagsData.concat(tags) });
+      //
       setInputTag("");
     },
-    [inputTag, tags],
+    [inputTag, onChangeTagsData, tags, tagsData],
   );
 
   const onRemove = useCallback((tag) => {
