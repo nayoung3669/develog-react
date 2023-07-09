@@ -3,30 +3,29 @@ import "react-quill/dist/quill.snow.css";
 import { styled } from "styled-components";
 import { Input } from "../../common";
 
-const Editor = () => {
-  const modules = {
-    toolbar: [
-      ["bold", "italic", "underline", "strike"], // toggled buttons
-      ["blockquote", "code-block"],
+const Editor = ({ title, body, onChangeField }) => {
+  const onChangeTitle = (e) => {
+    onChangeField({ key: "title", value: e.target.value });
+  };
 
-      [{ list: "ordered" }, { list: "bullet" }],
-      [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-      [{ direction: "rtl" }], // text direction
-
-      [{ size: ["small", false, "large", "huge"] }], // custom dropdown
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-      [{ font: [] }],
-    ],
+  const onChangeBody = (html) => {
+    onChangeField({ key: "body", value: html });
   };
 
   return (
     <EditorBlock>
-      <Input ph="제목을 입력하세요." w="80%" h="40px" />
+      <Input
+        ph="제목을 입력하세요."
+        w="80%"
+        h="40px"
+        value={title}
+        onChange={onChangeTitle}
+      />
       <ReactQuill
         modules={modules}
-        placeholder="내용을 작성하세요."></ReactQuill>
+        placeholder="내용을 작성하세요."
+        defaltValue={body} //quill 특성
+        onChange={onChangeBody}></ReactQuill>
     </EditorBlock>
   );
 };
@@ -47,3 +46,19 @@ const EditorBlock = styled.div`
     margin-bottom: 30px;
   }
 `;
+const modules = {
+  toolbar: [
+    ["bold", "italic", "underline", "strike"], // toggled buttons
+    ["blockquote", "code-block"],
+
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+    [{ direction: "rtl" }], // text direction
+
+    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+  ],
+};
