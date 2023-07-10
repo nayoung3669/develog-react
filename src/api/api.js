@@ -29,6 +29,15 @@ export const signin = async (userData) => {
 //인증 확인
 export const authorizeUser = async () => {};
 
+export const getPosts = async () => {
+  try {
+    const response = await axios.get("http://localhost:4000/posts");
+    console.log(response);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
 //posts (post) : json-server
 export const writePost = async (newPost) => {
   try {
