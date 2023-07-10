@@ -49,15 +49,15 @@ export const verifyUser = async () => {
 
 //get posts data
 export const getPosts = async () => {
-  // try {
-  const response = await axios.get("http://localhost:4000/posts");
-  console.log("get post data");
-  console.log(response);
-  return response.data;
-  // } catch (e) {
-  //   console.log(e);
-  //   return e;
-  // }
+  try {
+    const response = await axios.get("http://localhost:4000/posts");
+    console.log("get post data");
+    console.log(response);
+    return response.data;
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
 };
 
 //post posts
