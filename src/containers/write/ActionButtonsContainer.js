@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { initialize } from "../../redux/modules/write";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getPosts, writePost } from "../../api/api";
+import { getPosts, verifyUser, writePost } from "../../api/api";
 
 const ActionButtonsContainer = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,6 @@ const ActionButtonsContainer = () => {
     onSuccess: () => {
       queryClient.invalidateQueries("");
       console.log(data);
-      console.log("succeed");
     },
     onError: () => {
       console.log("error!");
@@ -29,15 +28,23 @@ const ActionButtonsContainer = () => {
     tags: write.tags,
   }));
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = async () => {
     const newPost = {
       title,
       body,
       tags,
     };
-    mutation.mutate(newPost);
-    alert("포스팅 완료되었습니다.");
-    dispatch(initialize());
+
+    try {
+      await verifyUser();
+      mutation.mutate(newPost);
+      alert("포스팅 완료되었습니다.");
+      dispatch(initialize());
+    } catch (e) {
+      console.log(e);
+      alert("인증되지 않은 회원입니다.");
+      navigate("login");
+    }
   };
 
   const onCancel = () => {
