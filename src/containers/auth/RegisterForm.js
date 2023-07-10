@@ -57,7 +57,7 @@ const RegisterForm = () => {
 
   return (
     <AuthForm
-      typeName="register"
+      typeName={"register"}
       formData={formData}
       checkPW={checkPW}
       onChange={onChange}

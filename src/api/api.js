@@ -30,7 +30,7 @@ export const signin = async (userData) => {
 export const authorizeUser = async () => {};
 
 //posts (post) : json-server
-export const publishPost = async (newPost) => {
+export const writePost = async (newPost) => {
   try {
     const response = await axios.post("http://localhost:4000/posts", newPost);
     console.log(response);

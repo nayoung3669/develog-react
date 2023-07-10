@@ -44,7 +44,7 @@ const TagBox = ({ tagsData, onChangeTagsData }) => {
           placeholder="태그를 입력하세요."
           value={inputTag}
           onChange={onChangeHandler}></input>
-        <Button w="43" h="40" onClick={onSubmitHandler}>
+        <Button w={"43"} h={"40"} onClick={onSubmitHandler}>
           추가
         </Button>
       </TagFormBlock>

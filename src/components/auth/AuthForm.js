@@ -23,8 +23,8 @@ const AuthForm = ({
           className="input"
           name="id"
           ph="ID"
-          w="90%"
-          h="50px"
+          w={"90%"}
+          h={"50px"}
           value={formData.id}
           onChange={onChange}
         />
@@ -32,8 +32,8 @@ const AuthForm = ({
           className="input"
           name="password"
           ph="PW"
-          w="90%"
-          h="50px"
+          w={"90%"}
+          h={"50px"}
           value={formData.password}
           onChange={onChange}
         />
@@ -41,8 +41,8 @@ const AuthForm = ({
           <Input
             className="input"
             ph="PW"
-            w="90%"
-            h="50px"
+            w={"90%"}
+            h={"50px"}
             value={checkPW}
             onChange={onConfirm}
           />
