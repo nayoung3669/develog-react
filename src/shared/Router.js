@@ -14,7 +14,8 @@ import { verifyUser } from "../api/api";
 import { useEffect, useState } from "react";
 
 const Router = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const accessToken = localStorage.getItem("accessToken");
+  const [isAuth, setIsAuth] = useState(accessToken);
 
   useEffect(() => {
     const checkIsAuth = async () => {
@@ -31,8 +32,10 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route element={<AuthRoutes isAuth={isAuth} />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
         <Route element={<ProtectedRoutes isAuth={isAuth} />}>
           <Route path="/home" element={<PostListPage />} />
           <Route path="/write" element={<WritePage />} />
@@ -44,6 +47,10 @@ const Router = () => {
 };
 
 export default Router;
+
+const AuthRoutes = ({ isAuth }) => {
+  return !isAuth ? <Outlet /> : <Navigate to={"/home"} />;
+};
 
 const ProtectedRoutes = ({ isAuth }) => {
   return isAuth ? <Outlet /> : <Navigate to={"/login"} />;
