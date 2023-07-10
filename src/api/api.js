@@ -21,6 +21,7 @@ export const signin = async (userData) => {
       `${process.env.REACT_APP_SERVER_URL}/login`,
       userData,
     );
+    console.log(response);
     localStorage.setItem("accessToken", response.data.token);
     return response;
   } catch (e) {
@@ -48,15 +49,17 @@ export const verifyUser = async () => {
 
 //get posts data
 export const getPosts = async () => {
-  try {
-    const response = await axios.get("http://localhost:4000/posts");
-    console.log("get post data");
-    console.log(response);
-    return response;
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  const response = await axios.get("http://localhost:4000/posts");
+  console.log("get post data");
+  console.log(response);
+  return response.data;
+  // } catch (e) {
+  //   console.log(e);
+  //   return e;
+  // }
 };
+
 //post posts
 export const writePost = async (newPost) => {
   try {

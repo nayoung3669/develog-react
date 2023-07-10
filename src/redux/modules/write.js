@@ -8,7 +8,6 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value,
 }));
-// export const writePost = createAction(WRITE_POST, (newPost) => newPost);
 
 const initialState = {
   title: "",

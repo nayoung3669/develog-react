@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ActionButtons from "../../components/write/ActionButtons";
 import { useDispatch, useSelector } from "react-redux";
 import { initialize } from "../../redux/modules/write";
@@ -10,7 +10,14 @@ const ActionButtonsContainer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { data } = useQuery("posts", getPosts);
+  const { isLoading, isFetching, isError, data } = useQuery("posts", getPosts);
+
+  useEffect(() => {
+    console.log(isError);
+    console.log(isLoading);
+    console.log(isFetching);
+    console.log(data);
+  }, [data, isError, isFetching, isLoading]);
 
   const mutation = useMutation(writePost, {
     onSuccess: () => {
