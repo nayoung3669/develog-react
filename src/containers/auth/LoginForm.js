@@ -16,7 +16,7 @@ const LoginForm = () => {
   const mutation = useMutation(signin, {
     onSuccess: () => {
       queryClient.invalidateQueries("signin");
-      navigate("/");
+      navigate("/home");
     },
     onError: (e) => {
       alert("ID 또는 PW가 올바르지 않습니다.");

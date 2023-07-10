@@ -22,7 +22,7 @@ const AuthForm = ({
         <Input
           className="input"
           name="id"
-          ph="ID"
+          ph={"ID"}
           w={"90%"}
           h={"50px"}
           value={formData.id}
@@ -31,7 +31,7 @@ const AuthForm = ({
         <Input
           className="input"
           name="password"
-          ph="PW"
+          ph={"PW"}
           w={"90%"}
           h={"50px"}
           value={formData.password}
@@ -40,7 +40,7 @@ const AuthForm = ({
         {typeName === "register" && (
           <Input
             className="input"
-            ph="PW"
+            ph={"PW"}
             w={"90%"}
             h={"50px"}
             value={checkPW}
@@ -48,7 +48,7 @@ const AuthForm = ({
           />
         )}
       </div>
-      <Button w="185" h="40" onClick={onSubmit}>
+      <Button w={"185"} h={"40"} onClick={onSubmit}>
         {typeName.toUpperCase() + `${" >"}`}
       </Button>
       {typeName === "login" && (

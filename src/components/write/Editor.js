@@ -15,15 +15,15 @@ const Editor = ({ title, body, onChangeField }) => {
   return (
     <EditorBlock>
       <Input
-        ph="제목을 입력하세요."
-        w="80%"
-        h="40px"
+        ph={"제목을 입력하세요."}
+        w={"80%"}
+        h={"40px"}
         value={title}
         onChange={onChangeTitle}
       />
       <ReactQuill
         modules={modules}
-        placeholder="내용을 작성하세요."
+        placeholder={"내용을 작성하세요."}
         defaltValue={body} //quill 특성
         onChange={onChangeBody}></ReactQuill>
     </EditorBlock>

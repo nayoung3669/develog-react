@@ -2,20 +2,26 @@ import { styled } from "styled-components";
 import theme from "../../lib/styles/theme";
 import { Button } from "../../common";
 import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
 
-  const onClick = () => {
-    navigate("/");
-  };
+  const onClickLogo = useCallback(() => {
+    navigate("/home");
+  }, [navigate]);
+
+  const onClickLogout = useCallback(() => {
+    navigate("/login");
+    alert("로그아웃 되었습니다.");
+  }, [navigate]);
   return (
     <>
       <HeaderBlock>
-        <div className="logoText" onClick={onClick}>
+        <div className="logoText" onClick={onClickLogo}>
           DEVLOG
         </div>
-        <Button w="80" h="30" c="dark">
+        <Button w={"80"} h={"30"} c={"dark"} onClick={onClickLogout}>
           LOGOUT
         </Button>
       </HeaderBlock>

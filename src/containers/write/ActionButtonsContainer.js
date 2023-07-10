@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ActionButtons from "../../components/write/ActionButtons";
 import { useDispatch, useSelector } from "react-redux";
 import { initialize } from "../../redux/modules/write";
@@ -10,12 +10,21 @@ const ActionButtonsContainer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { data } = useQuery("posts", getPosts);
+  const { data } = useQuery("posts", getPosts, {
+    enabled: false, //초기렌더링시에만 실행 (prefetchQuery)
+  });
+
+  useEffect(() => {
+    queryClient.prefetchQuery("posts", getPosts);
+  }, [queryClient]);
 
   const mutation = useMutation(writePost, {
     onSuccess: () => {
       queryClient.invalidateQueries("");
-      console.log(data);
+      const lastPostId = data.data.at(-1);
+
+      console.log(lastPostId);
+      navigate(`/${lastPostId.id}`);
     },
     onError: () => {
       console.log("error!");
@@ -42,8 +51,8 @@ const ActionButtonsContainer = () => {
       dispatch(initialize());
     } catch (e) {
       console.log(e);
-      alert("인증되지 않은 회원입니다.");
-      navigate("login");
+      alert("로그인 후 이용해주세요.");
+      navigate("/login");
     }
   };
 

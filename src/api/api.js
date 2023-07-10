@@ -32,43 +32,36 @@ export const signin = async (userData) => {
 
 //인증 확인
 export const verifyUser = async () => {
-  try {
-    const response = await axios(`${process.env.REACT_APP_SERVER_URL}/user`, {
-      method: "get",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
-    console.log("회원 인증완료");
-    return response;
-  } catch (e) {
-    console.log("회원 인증 실패");
-    console.log(e);
-  }
+  // try {
+  const accessToken = localStorage.getItem("accessToken");
+  if (!accessToken) throw new Error("토큰이 없습니다.");
+
+  const response = await axios(`${process.env.REACT_APP_SERVER_URL}/user`, {
+    method: "get",
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+    },
+  });
+  console.log("회원 인증완료");
+  console.log(response);
+  return response;
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
 
 //get posts data
 export const getPosts = async () => {
-  try {
-    const response = await axios.get("http://localhost:4000/posts");
-    console.log("get post data");
-    console.log(response);
-    return response.data;
-  } catch (e) {
-    console.log(e);
-    return e;
-  }
+  const response = await axios.get("http://localhost:4000/posts");
+  return response;
 };
 
 //post posts
 export const writePost = async (newPost) => {
-  try {
-    const response = await axios.post("http://localhost:4000/posts", newPost);
-    console.log(response);
-    return response;
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  const response = await axios.post("http://localhost:4000/posts", newPost);
+  return response;
+  // } catch (e) {
+  //   console.log(e);
+  // }
 };
-
-//posts (get)
