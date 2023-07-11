@@ -1,11 +1,11 @@
 import Header from "../components/common/Header";
-import PostViewer from "../components/post/PostViewer";
+import PostViewerContainer from "../containers/post/PostViewerContainer";
 
 const PostPage = () => {
   return (
     <div>
       <Header />
-      <PostViewer />
+      <PostViewerContainer />
     </div>
   );
 };

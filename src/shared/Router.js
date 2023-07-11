@@ -61,7 +61,7 @@ const Router = () => {
 export default Router;
 
 const AuthRoutes = ({ isAuth }) => {
-  return !isAuth ? <Outlet /> : <Navigate to={"/home"} />;
+  return isAuth === false ? <Outlet /> : <Navigate to={"/home"} />;
 };
 
 const ProtectedRoutes = ({ isAuth }) => {

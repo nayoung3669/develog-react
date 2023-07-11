@@ -3,13 +3,17 @@ import ActionButtons from "../../components/write/ActionButtons";
 import { useDispatch, useSelector } from "react-redux";
 import { initialize } from "../../redux/modules/write";
 import { useNavigate } from "react-router-dom";
-import { useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { getPosts, writePost } from "../../api/api";
 
 const ActionButtonsContainer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { data } = useQuery("posts", getPosts, {
+    enabled: false, //초기렌더링시에만 실행 (prefetchQuery)
+  });
+  console.log(data);
 
   useEffect(() => {
     queryClient.prefetchQuery("posts", getPosts);
@@ -22,6 +26,7 @@ const ActionButtonsContainer = () => {
   }));
 
   const onSubmitHandler = async () => {
+    const dataLength = data.data.length;
     const newPost = {
       title,
       body,
@@ -32,6 +37,7 @@ const ActionButtonsContainer = () => {
       await writePost(newPost);
       alert("포스팅 완료되었습니다.");
       dispatch(initialize());
+      // navigate(`/${dataLength}`);
       navigate("/home");
     } catch (e) {
       console.log(e);
