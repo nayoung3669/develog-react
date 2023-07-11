@@ -26,14 +26,11 @@ const Router = () => {
   useEffect(() => {
     const verify = async () => {
       if (localStorage.getItem("accessToken")) {
-        //백엔드 요청  (토큰 검증)
-        // if : refresh token 검증
+        // BE : refresh token 검증
         try {
           await verifyUser();
           dispatch(verifySuccess());
         } catch (e) {
-          console.log("sdf");
-
           dispatch(verifyFailure());
           console.log(e);
         }

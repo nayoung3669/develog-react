@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { initialize } from "../../redux/modules/write";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
-import { getPosts, verifyUser, writePost } from "../../api/api";
+import { getPosts, writePost } from "../../api/api";
 
 const ActionButtonsContainer = () => {
   const dispatch = useDispatch();
@@ -29,9 +29,10 @@ const ActionButtonsContainer = () => {
     };
 
     try {
-      await verifyUser().then(writePost(newPost));
+      await writePost(newPost);
       alert("포스팅 완료되었습니다.");
       dispatch(initialize());
+      navigate("/home");
     } catch (e) {
       console.log(e);
       alert("다시 로그인 해주세요.");

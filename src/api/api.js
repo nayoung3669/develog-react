@@ -11,7 +11,6 @@ export const signup = async (newUser) => {
 
 //로그인
 export const signin = async (userData) => {
-  console.log(userData);
   const response = await axios.post(
     `${process.env.REACT_APP_SERVER_URL}/login`,
     userData,
