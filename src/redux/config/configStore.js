@@ -1,8 +1,10 @@
-import { combineReducers } from "redux";
-import write from "../modules/write";
+import { combineReducers } from "@reduxjs/toolkit";
+import writeReducer from "../modules/write";
+import userReducer from "../modules/user";
 
 const rootReducer = combineReducers({
-  write,
+  write: writeReducer,
+  user: userReducer,
 });
 
 export default rootReducer;
