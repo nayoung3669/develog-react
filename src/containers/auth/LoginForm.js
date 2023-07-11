@@ -1,29 +1,20 @@
 import AuthForm from "../../components/auth/AuthForm";
-import { useMutation, useQueryClient } from "react-query";
-import { useEffect, useState } from "react";
-import { signin } from "../../api/api";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../redux/modules/user";
 
 const LoginForm = () => {
-  const navigate = useNavigate();
-
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     id: "",
     password: "",
   });
 
-  useEffect(() => {}, []);
+  const loginMutation = useLoginMutation();
 
-  const mutation = useMutation(signin, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("signin");
-      navigate("/home");
-    },
-    onError: (e) => {
-      alert("ID 또는 PW가 올바르지 않습니다.");
-    },
-  });
+  const handleLogin = async () => {
+    await loginMutation.mutateAsync(formData);
+  };
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +23,7 @@ const LoginForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    mutation.mutate(formData);
+    handleLogin();
   };
 
   return (
