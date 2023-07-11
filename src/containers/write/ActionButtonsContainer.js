@@ -3,31 +3,17 @@ import ActionButtons from "../../components/write/ActionButtons";
 import { useDispatch, useSelector } from "react-redux";
 import { initialize } from "../../redux/modules/write";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 import { getPosts, verifyUser, writePost } from "../../api/api";
-import { useVerifyMutation } from "../../redux/modules/user";
 
 const ActionButtonsContainer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const verifyMutation = useVerifyMutation();
 
   useEffect(() => {
     queryClient.prefetchQuery("posts", getPosts);
   }, [queryClient]);
-
-  const mutation = useMutation(writePost, {
-    onSuccess: async () => {
-      queryClient.invalidateQueries("posts");
-      const updatedData = queryClient.getQueryData("posts");
-      const lastPostId = updatedData.data.at(-1);
-      navigate(`/${lastPostId.id}`);
-    },
-    onError: () => {
-      console.log("error!");
-    },
-  });
 
   const { title, body, tags } = useSelector(({ write }) => ({
     title: write.title,
@@ -43,7 +29,7 @@ const ActionButtonsContainer = () => {
     };
 
     try {
-      await verifyMutation.mutateAsync().then(mutation.mutate(newPost));
+      await verifyUser().then(writePost(newPost));
       alert("포스팅 완료되었습니다.");
       dispatch(initialize());
     } catch (e) {

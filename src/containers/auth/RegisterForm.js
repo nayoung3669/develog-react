@@ -1,26 +1,25 @@
 import { useState } from "react";
 import AuthForm from "../../components/auth/AuthForm";
-import { useMutation, useQueryClient } from "react-query";
 import { signup } from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const [checkPW, setCheckPW] = useState(""); //비밀번호 확인
   const [formData, setFormData] = useState({
     id: "",
     password: "",
   });
-  const mutation = useMutation(signup, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("signup");
-      navigate("/home");
-    },
-    onError: (e) => {
-      alert("이미 가입한 ID입니다.");
-    },
-  });
+
+  const handleRegister = async () => {
+    try {
+      await signup(formData);
+      alert("회원가입 되었습니다. 로그인 해주세요");
+      navigate("/login");
+    } catch (e) {
+      console.log(e);
+    }
+  };
   // id, pw 영문 숫자 조합 8자리 이상
   const validateCondition = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
 
@@ -51,7 +50,7 @@ const RegisterForm = () => {
       alert("ID와 PW는 영문, 숫자 조합 8-20자리입니다.");
       return;
     }
-    mutation.mutate(formData);
+    handleRegister();
     setFormData({ ...formData, id: "", password: "" });
   };
 

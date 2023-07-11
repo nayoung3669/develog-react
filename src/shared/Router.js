@@ -11,24 +11,38 @@ import RegisterPage from "../pages/RegisterPage";
 import WritePage from "../pages/WritePage";
 import PostPage from "../pages/PostPage";
 import { useEffect } from "react";
-import { verifySucess } from "../redux/modules/user";
+import {
+  loginFailure,
+  verifyFailure,
+  verifySuccess,
+} from "../redux/modules/user";
 import { useDispatch, useSelector } from "react-redux";
+import { verifyUser } from "../api/api";
 
 const Router = () => {
   const isAuth = useSelector(({ user }) => user.isLoggedIn);
-  console.log(isAuth);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   useEffect(() => {
     const verify = async () => {
       if (localStorage.getItem("accessToken")) {
         //백엔드 요청  (토큰 검증)
         // if : refresh token 검증
-        dispatch(verifySucess());
+        try {
+          await verifyUser();
+          dispatch(verifySuccess());
+        } catch (e) {
+          console.log("sdf");
+
+          dispatch(verifyFailure());
+          console.log(e);
+        }
+      } else {
+        dispatch(loginFailure());
       }
     };
     verify();
-  }, [isAuth]);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

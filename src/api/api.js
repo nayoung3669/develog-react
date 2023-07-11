@@ -16,7 +16,8 @@ export const signin = async (userData) => {
     `${process.env.REACT_APP_SERVER_URL}/login`,
     userData,
   );
-  console.log(response);
+  const { token } = response.data;
+  localStorage.setItem("accessToken", token);
   return response;
 };
 

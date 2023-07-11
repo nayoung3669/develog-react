@@ -4,12 +4,11 @@ import "./index.css";
 import App from "./App";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
 import rootReducer from "./redux/config/configStore";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { configureStore } from "@reduxjs/toolkit";
 
 const queryClient = new QueryClient();
-const store = createStore(rootReducer, composeWithDevTools());
+const store = configureStore({ reducer: rootReducer });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

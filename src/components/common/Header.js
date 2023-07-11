@@ -3,28 +3,29 @@ import theme from "../../lib/styles/theme";
 import { Button } from "../../common";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
-import { useLogoutMutation } from "../../redux/modules/user";
+import { useDispatch } from "react-redux";
+import { verifyFailure } from "../../redux/modules/user";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const logoutMutation = useLogoutMutation();
 
   const onClickLogo = useCallback(() => {
     navigate("/home");
   }, [navigate]);
 
-  const onClickLogout = useCallback(async () => {
-    await logoutMutation.mutateAsync();
+  const handleLogout = async () => {
+    dispatch(verifyFailure());
     alert("로그아웃 되었습니다.");
-    navigate("/login");
-  }, [logoutMutation, navigate]);
+  };
+
   return (
     <>
       <HeaderBlock>
         <div className="logoText" onClick={onClickLogo}>
           DEVLOG
         </div>
-        <Button w={"80"} h={"30"} c={"dark"} onClick={onClickLogout}>
+        <Button w={"80"} h={"30"} c={"dark"} onClick={handleLogout}>
           LOGOUT
         </Button>
       </HeaderBlock>
@@ -60,7 +61,6 @@ const HeaderBlock = styled.div`
   }
 `;
 
-//헤더만큼 차지 (컨텐츠 가리지 않게)
 const Space = styled.div`
   height: 4.5rem;
 `;

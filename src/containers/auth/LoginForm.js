@@ -1,19 +1,24 @@
 import AuthForm from "../../components/auth/AuthForm";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../../redux/modules/user";
+import { signin } from "../../api/api";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../redux/modules/user";
 
 const LoginForm = () => {
-  // const queryClient = useQueryClient();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     id: "",
     password: "",
   });
 
-  const loginMutation = useLoginMutation();
-
   const handleLogin = async () => {
-    await loginMutation.mutateAsync(formData);
+    try {
+      await signin(formData);
+      console.log("로그인 성공");
+      dispatch(loginSuccess());
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onChange = (e) => {
