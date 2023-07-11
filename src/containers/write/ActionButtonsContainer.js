@@ -58,7 +58,7 @@ const ActionButtonsContainer = () => {
 
   const onCancel = () => {
     //작성 취소할것인지 묻기 필요
-    navigate("/");
+    navigate("/home");
   };
 
   return (

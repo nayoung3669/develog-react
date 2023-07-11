@@ -15,7 +15,7 @@ const RegisterForm = () => {
   const mutation = useMutation(signup, {
     onSuccess: () => {
       queryClient.invalidateQueries("signup");
-      navigate("/");
+      navigate("/home");
     },
     onError: (e) => {
       alert("이미 가입한 ID입니다.");
