@@ -2,16 +2,11 @@ import axios from "axios";
 
 //회원가입
 export const signup = async (newUser) => {
-  try {
-    const response = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/register`,
-      newUser,
-    );
-    return response;
-  } catch (e) {
-    console.log(e);
-    console.log("회원가입 실패");
-  }
+  const response = await axios.post(
+    `${process.env.REACT_APP_SERVER_URL}/register`,
+    newUser,
+  );
+  return response;
 };
 
 //로그인
@@ -41,9 +36,6 @@ export const verifyUser = async () => {
       authorization: `Bearer ${accessToken}`,
     },
   });
-
-  console.log("회원 인증완료");
-  console.log(response);
   return response;
 };
 

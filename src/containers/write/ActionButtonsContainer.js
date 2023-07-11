@@ -5,28 +5,23 @@ import { initialize } from "../../redux/modules/write";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getPosts, verifyUser, writePost } from "../../api/api";
+import { useVerifyMutation } from "../../redux/modules/user";
 
 const ActionButtonsContainer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { data } = useQuery("posts", getPosts, {
-    enabled: false, //초기렌더링시에만 실행 (prefetchQuery)
-  });
+  const verifyMutation = useVerifyMutation();
 
   useEffect(() => {
     queryClient.prefetchQuery("posts", getPosts);
   }, [queryClient]);
-
-  useEffect(() => {}, [queryClient]);
 
   const mutation = useMutation(writePost, {
     onSuccess: async () => {
       queryClient.invalidateQueries("posts");
       const updatedData = queryClient.getQueryData("posts");
       const lastPostId = updatedData.data.at(-1);
-
-      console.log();
       navigate(`/${lastPostId.id}`);
     },
     onError: () => {
@@ -48,13 +43,12 @@ const ActionButtonsContainer = () => {
     };
 
     try {
-      await verifyUser();
-      mutation.mutate(newPost);
+      await verifyMutation.mutateAsync().then(mutation.mutate(newPost));
       alert("포스팅 완료되었습니다.");
       dispatch(initialize());
     } catch (e) {
       console.log(e);
-      alert("로그인 후 이용해주세요.");
+      alert("다시 로그인 해주세요.");
       navigate("/login");
     }
   };

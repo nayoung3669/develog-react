@@ -11,6 +11,7 @@ const PostViewer = () => {
   const { postId } = useParams();
   // const post = data.filter((post) => post.id === postId);
   console.log(data);
+  //useSelector 로?
 
   return (
     <PostViewerBox>

@@ -3,20 +3,21 @@ import theme from "../../lib/styles/theme";
 import { Button } from "../../common";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
-import { signout } from "../../api/api";
+import { useLogoutMutation } from "../../redux/modules/user";
 
 const Header = () => {
   const navigate = useNavigate();
+  const logoutMutation = useLogoutMutation();
 
   const onClickLogo = useCallback(() => {
     navigate("/home");
   }, [navigate]);
 
-  const onClickLogout = useCallback(() => {
-    signout();
+  const onClickLogout = useCallback(async () => {
+    await logoutMutation.mutateAsync();
     alert("로그아웃 되었습니다.");
     navigate("/login");
-  }, [navigate]);
+  }, [logoutMutation, navigate]);
   return (
     <>
       <HeaderBlock>
