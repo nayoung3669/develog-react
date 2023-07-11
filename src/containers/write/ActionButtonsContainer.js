@@ -18,12 +18,15 @@ const ActionButtonsContainer = () => {
     queryClient.prefetchQuery("posts", getPosts);
   }, [queryClient]);
 
-  const mutation = useMutation(writePost, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("");
-      const lastPostId = data.data.at(-1);
+  useEffect(() => {}, [queryClient]);
 
-      console.log(lastPostId);
+  const mutation = useMutation(writePost, {
+    onSuccess: async () => {
+      queryClient.invalidateQueries("posts");
+      const updatedData = queryClient.getQueryData("posts");
+      const lastPostId = updatedData.data.at(-1);
+
+      console.log();
       navigate(`/${lastPostId.id}`);
     },
     onError: () => {

@@ -1,6 +1,6 @@
 import AuthForm from "../../components/auth/AuthForm";
 import { useMutation, useQueryClient } from "react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signin } from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,8 @@ const LoginForm = () => {
     id: "",
     password: "",
   });
+
+  useEffect(() => {}, []);
 
   const mutation = useMutation(signin, {
     onSuccess: () => {
@@ -30,9 +32,6 @@ const LoginForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    //유효성검사
-
     mutation.mutate(formData);
   };
 

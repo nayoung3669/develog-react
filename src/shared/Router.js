@@ -14,18 +14,21 @@ import { verifyUser } from "../api/api";
 import { useEffect, useState } from "react";
 
 const Router = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  const [isAuth, setIsAuth] = useState(accessToken);
+  const [isAuth, setIsAuth] = useState(false);
 
-  useEffect(() => {
-    const checkIsAuth = async () => {
-      try {
-        await verifyUser();
+  const checkIsAuth = async () => {
+    try {
+      const v = await verifyUser();
+      if (v.status === 200) {
         setIsAuth(true);
-      } catch (e) {
+      } else {
         setIsAuth(false);
       }
-    };
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
     checkIsAuth();
   }, []);
 

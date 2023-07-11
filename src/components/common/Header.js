@@ -3,6 +3,7 @@ import theme from "../../lib/styles/theme";
 import { Button } from "../../common";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
+import { signout } from "../../api/api";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -12,8 +13,9 @@ const Header = () => {
   }, [navigate]);
 
   const onClickLogout = useCallback(() => {
-    navigate("/login");
+    signout();
     alert("로그아웃 되었습니다.");
+    navigate("/login");
   }, [navigate]);
   return (
     <>
