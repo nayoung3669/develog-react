@@ -1,14 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "../common";
 import Header from "../components/common/Header";
-import PostList from "../components/posts/PostList";
+import PostListContainer from "../containers/posts/PostListContainer";
 
 const PostListPage = () => {
-  const navigate = useNavigate();
   return (
     <div>
       <Header />
-      <PostList />
+      <PostListContainer />
     </div>
   );
 };

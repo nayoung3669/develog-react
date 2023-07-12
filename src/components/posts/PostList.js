@@ -1,43 +1,10 @@
-import React, { useEffect } from "react";
-import { useQuery, useQueryClient } from "react-query";
-import { getPosts } from "../../api/api";
 import PostHeader from "../common/PostHeader";
-import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-const PostList = () => {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const { isLoading, error, data } = useQuery("posts", getPosts, {
-    enabled: false, //초기렌더링시에만 실행 (prefetchQuery)
-  });
-
-  //내림차순 정렬
-  const sortedPosts = data?.data.sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
-    return dateB - dateA;
-  });
-
-  useEffect(() => {
-    queryClient.prefetchQuery("posts", getPosts);
-  }, [queryClient]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>An error has occured.</div>;
-  }
-
-  const onClickHandler = (id) => {
-    navigate(`/${id}`);
-  };
-
+const PostList = ({ data, onClickHandler }) => {
   return (
     <PostListBlock>
-      {sortedPosts?.map((post) => {
+      {data?.map((post) => {
         const date = new Date(post.date).toLocaleDateString("ko-KR", {
           year: "numeric",
           month: "long",
