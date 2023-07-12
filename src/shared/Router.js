@@ -18,6 +18,7 @@ import {
 } from "../redux/modules/user";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyUser } from "../api/api";
+import OauthPage from "../pages/OauthPage";
 
 const Router = () => {
   const isAuth = useSelector(({ user }) => user.isLoggedIn);
@@ -47,6 +48,7 @@ const Router = () => {
         <Route element={<AuthRoutes isAuth={isAuth} />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/oauth" element={<OauthPage />} />
         </Route>
         <Route element={<ProtectedRoutes isAuth={isAuth} />}>
           <Route path="/home" element={<PostListPage />} />
