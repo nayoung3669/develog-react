@@ -21,8 +21,8 @@ import { verifyUser } from "../api/api";
 
 const Router = () => {
   const isAuth = useSelector(({ user }) => user.isLoggedIn);
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     const verify = async () => {
       if (localStorage.getItem("accessToken")) {
