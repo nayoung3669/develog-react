@@ -3,6 +3,7 @@ import { useState } from "react";
 import { signin } from "../../api/api";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../redux/modules/user";
+import SocialLogin from "./SocialLogin";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -32,12 +33,15 @@ const LoginForm = () => {
   };
 
   return (
-    <AuthForm
-      typeName={"login"}
-      formData={formData}
-      onChange={onChange}
-      onSubmit={onSubmit}
-    />
+    <>
+      <AuthForm
+        typeName={"login"}
+        formData={formData}
+        onChange={onChange}
+        onSubmit={onSubmit}
+      />
+      <SocialLogin />
+    </>
   );
 };
 

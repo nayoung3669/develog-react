@@ -63,9 +63,9 @@ const AuthForm = ({
 export default AuthForm;
 
 const AuthFormBlock = styled.div`
-  padding: 50px;
+  padding: 20px;
   ${theme.common.flexCenterColumn}
-  gap: 70px;
+  gap: 30px;
 
   .typeText {
     font-size: 1.2rem;
