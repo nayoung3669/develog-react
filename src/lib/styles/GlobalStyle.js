@@ -11,7 +11,9 @@ const GlobalStyle = createGlobalStyle`
         color: inherit;
     }
     body {
+        min-height: 100%;
         font-family: 'Orbit', sans-serif;
+        position: relative;
     }
     #root {
         min-height: 100vh;

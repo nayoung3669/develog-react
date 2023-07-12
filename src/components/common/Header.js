@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 import theme from "../../lib/styles/theme";
 import { Button } from "../../common";
 import { useNavigate } from "react-router-dom";
-import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { verifyFailure } from "../../redux/modules/user";
 
@@ -10,18 +9,18 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onClickLogo = useCallback(() => {
+  const onClickLogo = () => {
     navigate("/home");
-  }, [navigate]);
+  };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     dispatch(verifyFailure());
     alert("로그아웃 되었습니다.");
   };
 
-  const onClickWrite = useCallback(() => {
+  const onClickWrite = () => {
     navigate("/write");
-  }, [navigate]);
+  };
 
   return (
     <>

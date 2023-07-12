@@ -1,3 +1,4 @@
+import Footer from "../components/common/Footer";
 import Header from "../components/common/Header";
 import ActionButtonsContainer from "../containers/write/ActionButtonsContainer";
 import EditorContainer from "../containers/write/EditorContainer";
@@ -10,6 +11,7 @@ const WritePage = () => {
       <EditorContainer />
       <TagBoxContainer />
       <ActionButtonsContainer />
+      <Footer />
     </div>
   );
 };
