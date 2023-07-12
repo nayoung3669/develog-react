@@ -4,7 +4,7 @@ import { Button } from "../../common";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { verifyFailure } from "../../redux/modules/user";
-import { signout } from "../../api/api";
+import { socialLogout } from "../../api/Oauth";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,8 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    signout();
+    // signout();
+    socialLogout();
     dispatch(verifyFailure());
     alert("로그아웃 되었습니다.");
   };

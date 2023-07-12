@@ -18,38 +18,42 @@ import {
 } from "../redux/modules/user";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyUser } from "../api/api";
-import OauthPage from "../pages/OauthPage";
+import KakaoRedirect from "../pages/Oauth/KakaoRedirect";
+import NaverRedirect from "../pages/Oauth/NaverRedirect";
 
 const Router = () => {
   const isAuth = useSelector(({ user }) => user.isLoggedIn);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const verify = async () => {
-      if (localStorage.getItem("accessToken")) {
-        // BE : refresh token 검증
-        try {
-          await verifyUser();
-          dispatch(verifySuccess());
-        } catch (e) {
-          dispatch(verifyFailure());
-          console.log(e);
-        }
-      } else {
-        dispatch(loginFailure());
-      }
-    };
-    verify();
+    // const verify = async () => {
+    //   if (localStorage.getItem("accessToken")) {
+    //     // BE : refresh token 검증
+    //     try {
+    //       await verifyUser();
+    //       dispatch(verifySuccess());
+    //     } catch (e) {
+    //       dispatch(verifyFailure());
+    //       console.log(e);
+    //     }
+    //   } else {
+    //     dispatch(loginFailure());
+    //   }
+    // };
+    // verify();
   }, [dispatch]);
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/kakao" element={<KakaoRedirect />} />
+        <Route path="/naver" element={<NaverRedirect />} />
+
         <Route element={<AuthRoutes isAuth={isAuth} />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/oauth" element={<OauthPage />} />
         </Route>
+
         <Route element={<ProtectedRoutes isAuth={isAuth} />}>
           <Route path="/home" element={<PostListPage />} />
           <Route path="/write" element={<WritePage />} />
