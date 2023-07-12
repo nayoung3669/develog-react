@@ -1,15 +1,18 @@
 import React from "react";
 import { css, styled } from "styled-components";
 
-const PostHeader = ({ title, tags, ...props }) => {
+const PostHeader = ({ title, tags, date, ...props }) => {
   return (
     <PostHeaderBlock hasMargin={props.hasMargin}>
       <div onClick={props.onClick}>
         <h1 className="title">{title}</h1>
-        <div className="tags">
-          {tags?.map((tag) => (
-            <p key={tag}>#{tag}</p>
-          ))}
+        <div className="details">
+          <p className="date"> {date}</p>
+          <div className="tags">
+            {tags?.map((tag) => (
+              <p key={tag}>#{tag}</p>
+            ))}
+          </div>
         </div>
       </div>
     </PostHeaderBlock>
@@ -20,6 +23,9 @@ export default PostHeader;
 
 const PostHeaderBlock = styled.div`
   border-bottom: 1.3px solid #ccc;
+  height: 80px;
+  cursor: pointer;
+
   ${({ hasMargin }) =>
     hasMargin &&
     css`
@@ -27,23 +33,20 @@ const PostHeaderBlock = styled.div`
 
       border: none;
     `}
-  cursor: pointer;
 
   .title {
     font-size: 2.4rem;
     font-weight: bold;
   }
-  .date {
-    margin: 30px 0px 0px 5px;
-    color: #4e4e4e;
-  }
-  .tags {
-    display: flex;
-    gap: 8px;
-    letter-spacing: -1px;
+  .details {
+    display: column;
+    margin-top: 20px;
+    letter-spacing: -1.25px;
     color: #707070;
-    margin: 8px 0px 35px 5px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    .tags {
+      margin-top: 5px;
+    }
   }
   .username {
     font-weight: bold;

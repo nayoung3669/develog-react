@@ -8,7 +8,6 @@ const PostListPage = () => {
   return (
     <div>
       <Header />
-      <Button onClick={() => navigate("/write")}>글쓰기</Button>
       <PostList />
     </div>
   );

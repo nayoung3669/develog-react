@@ -2,39 +2,28 @@
   "posts": [
     {
       "title": "Post example 1",
-      "body": "<p>Hi I'm new body 1</p>",
-      "tags": ["abc", "def", "ghi", "gkl"],
+      "body": "<p>Hi I'm new body1 !</p>",
+      "tags": [
+        "hi"
+      ],
+      "date": "2023-07-12T02:27:27.469Z",
       "id": 1
     },
     {
-      "title": "Post example 2",
-      "body": "<p>Hi I'm new body 2</p>",
-      "tags": ["abc", "def", "ghi", "gkl"],
+      "title": "Post example2",
+      "body": "<p>Hi I'm new body 2 !</p>",
+      "tags": [
+        "hi"
+      ],
+      "date": "2023-07-12T02:28:06.078Z",
       "id": 2
     },
     {
       "title": "Post example 3",
-      "body": "<p>Hi I'm new body 3</p>",
-      "tags": ["abc", "def", "ghi", "gkl"],
+      "body": "<p>Hi I'm 333333</p>",
+      "tags": [],
+      "date": "2023-07-12T02:29:34.413Z",
       "id": 3
-    },
-    {
-      "title": "Post example 4",
-      "body": "<p>Hi I'm new body 4</p>",
-      "tags": ["abc", "def", "ghi", "gkl"],
-      "id": 4
-    },
-    {
-      "title": "Post example 5",
-      "body": "<p>Hi I'm new body 5</p>",
-      "tags": ["abc", "def", "ghi", "gkl"],
-      "id": 5
-    },
-    {
-      "title": "Post example 6",
-      "body": "<p>Hi I'm new body 6</p>",
-      "tags": ["abc", "def", "ghi", "gkl"],
-      "id": 6
     }
   ]
 }

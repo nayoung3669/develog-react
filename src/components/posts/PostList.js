@@ -12,6 +12,13 @@ const PostList = () => {
     enabled: false, //초기렌더링시에만 실행 (prefetchQuery)
   });
 
+  //내림차순 정렬
+  const sortedPosts = data?.data.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB - dateA;
+  });
+
   useEffect(() => {
     queryClient.prefetchQuery("posts", getPosts);
   }, [queryClient]);
@@ -30,22 +37,30 @@ const PostList = () => {
 
   return (
     <PostListBlock>
-      {data?.data.map((post) => (
-        <div className="postheader">
-          <PostHeader
-            key={post.id}
-            title={post.title}
-            tags={post.tags}
-            hasMargin={true}
-            onClick={() => onClickHandler(post.id)}
-          />
-          <div
-            className="contents"
-            dangerouslySetInnerHTML={{
-              __html: `${post.body}`,
-            }}></div>
-        </div>
-      ))}
+      {sortedPosts?.map((post) => {
+        const date = new Date(post.date).toLocaleDateString("ko-KR", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        return (
+          <div className="postheader">
+            <PostHeader
+              key={post.id}
+              title={post.title}
+              tags={post.tags}
+              date={date}
+              hasMargin={true}
+              onClick={() => onClickHandler(post.id)}
+            />
+            <div
+              className="contents"
+              dangerouslySetInnerHTML={{
+                __html: `${post.body}`,
+              }}></div>
+          </div>
+        );
+      })}
     </PostListBlock>
   );
 };
@@ -54,11 +69,11 @@ export default PostList;
 
 const PostListBlock = styled.div`
   max-width: 780px;
-  margin: 20px auto;
+  margin: 70px auto;
   .postheader {
     border-bottom: 1px solid #ccc;
   }
   .contents {
-    padding: 0px 0px 45px 10px;
+    padding: 20px 0px 65px 10px;
   }
 `;

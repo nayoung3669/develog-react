@@ -19,15 +19,24 @@ const Header = () => {
     alert("로그아웃 되었습니다.");
   };
 
+  const onClickWrite = useCallback(() => {
+    navigate("/write");
+  }, [navigate]);
+
   return (
     <>
       <HeaderBlock>
         <div className="logoText" onClick={onClickLogo}>
           DEVLOG
         </div>
-        <Button w={"80"} h={"30"} c={"dark"} onClick={handleLogout}>
-          LOGOUT
-        </Button>
+        <div>
+          <Button w={"85"} h={"30"} c={"dark"} onClick={onClickWrite}>
+            글쓰기
+          </Button>
+          <Button w={"85"} h={"30"} c={"dark"} onClick={handleLogout}>
+            LOGOUT
+          </Button>
+        </div>
       </HeaderBlock>
       <Space />
     </>
@@ -55,7 +64,7 @@ const HeaderBlock = styled.div`
   }
 
   button {
-    margin-top: 5px;
+    margin: 10px;
     font-size: 0.8rem;
     letter-spacing: 1.8px;
   }
