@@ -67,6 +67,7 @@ export const socialLogout = async () => {
     const response = await axios("http://localhost:3001/user/logout", {
       method: "post",
     });
+    localStorage.removeItem("accessToken");
     console.log(response);
     return response;
   } catch (e) {
@@ -91,16 +92,15 @@ export const kakaoLogout = async (kakao) => {
 
 //사용자 반환 (usertoken)
 export const verifyUser = async () => {
-  try {
-    const response = await axios("http://localhost:3001/usertoken", {
-      method: "get",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
-    console.log(response);
-    return response;
-  } catch (e) {
-    console.log(e);
+  const response = await axios("http://localhost:3001/usertoken", {
+    method: "get",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+  });
+  if (response.status === 200 || response.status === 304) {
+    return true;
   }
+
+  return false;
 };

@@ -3,7 +3,7 @@ import theme from "../../lib/styles/theme";
 import { Button } from "../../common";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { verifyFailure } from "../../redux/modules/user";
+import { loginFailure, verifyFailure } from "../../redux/modules/user";
 import { verifyUser } from "../../api/Oauth";
 import { socialLogout } from "../../api/Oauth";
 
@@ -18,7 +18,7 @@ const Header = () => {
   const handleLogout = async () => {
     await socialLogout();
     // await kakaoLogout(tokens.kakao);
-    dispatch(verifyFailure());
+    dispatch(loginFailure());
     alert("로그아웃 되었습니다.");
     navigate("/login");
   };

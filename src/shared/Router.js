@@ -10,7 +10,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import WritePage from "../pages/WritePage";
 import PostPage from "../pages/PostPage";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { verifyFailure, verifySuccess } from "../redux/modules/user";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyUser } from "../api/Oauth";
@@ -18,35 +18,29 @@ import KakaoRedirect from "../pages/Oauth/KakaoRedirect";
 import NaverRedirect from "../pages/Oauth/NaverRedirect";
 import GoogleRedirect from "../pages/Oauth/GoogleRedirect";
 
+const checkLoginStatus = async () => {
+  const token = localStorage.getItem("accessToken");
+  if (!token) return false;
+
+  return await verifyUser();
+};
+
 const Router = () => {
   const isLoggedIn = useSelector(({ user }) => user.isLoggedIn);
-  const [isAuth, setIsAuth] = useState(isLoggedIn);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // const verify = async () => {
-    //   const res = await verifyUser();
-    //   if (res?.status === 200) {
-    //     dispatch(verifySuccess());
-    //     setIsLoggedIn(isAuth);
-    //   } else {
-    //     dispatch(verifyFailure());
-    //     setIsLoggedIn(isAuth);
-    //     console.log(isAuth);
-    //   }
-    // };
-    // verify();
-    const verifySimple = () => {
-      if (isLoggedIn) {
+    const verifyAuth = async () => {
+      const result = await checkLoginStatus();
+      if (result) {
         dispatch(verifySuccess());
-        setIsAuth(true);
       } else {
         dispatch(verifyFailure());
-        setIsAuth(false);
       }
     };
-    verifySimple();
-  }, [isLoggedIn]);
+
+    verifyAuth();
+  }, [dispatch, isLoggedIn]);
 
   return (
     <BrowserRouter>
@@ -55,12 +49,12 @@ const Router = () => {
         <Route path="/naver" element={<NaverRedirect />} />
         <Route path="/google" element={<GoogleRedirect />} />
 
-        <Route element={<AuthRoutes isAuth={isAuth} />}>
+        <Route element={<AuthRoutes isAuth={isLoggedIn} />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Route>
 
-        <Route element={<ProtectedRoutes isAuth={isAuth} />}>
+        <Route element={<ProtectedRoutes isAuth={isLoggedIn} />}>
           <Route path="/home" element={<PostListPage />} />
           <Route path="/write" element={<WritePage />} />
           <Route path=":postId" element={<PostPage />} />
