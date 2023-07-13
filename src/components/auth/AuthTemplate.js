@@ -8,7 +8,7 @@ const AuthTemplate = ({ children }) => {
       <ContentBox>
         <div className="logoText">
           <Link to="/">
-            {"<"}DEVLOG{"/>"}
+            {"<"} DEVELOG {"/>"}
           </Link>
         </div>
         {children}

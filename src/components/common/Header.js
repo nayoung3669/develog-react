@@ -16,11 +16,11 @@ const Header = () => {
   };
 
   const handleLogout = async () => {
-    // signout();
     await socialLogout();
+    // await kakaoLogout(tokens.kakao);
     dispatch(verifyFailure());
-
     alert("로그아웃 되었습니다.");
+    navigate("/login");
   };
 
   const onClickWrite = async () => {

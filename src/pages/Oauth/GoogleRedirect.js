@@ -14,6 +14,8 @@ const GoogleRedirect = () => {
         onSuccess={async (res) => {
           if (res.credential) {
             await googleLogin(res.credential);
+            console.log(res.credential);
+            //then ?
             localStorage.setItem("accessToken", res.credential);
             dispatch(loginSuccess());
             navigate("/home");

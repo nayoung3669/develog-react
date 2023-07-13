@@ -56,10 +56,26 @@ export const googleLogin = async (googleCode) => {
 };
 
 //로그아웃
+
 export const socialLogout = async () => {
   try {
     const response = await axios("http://localhost:3001/user/logout", {
       method: "post",
+    });
+    console.log(response);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const kakaoLogout = async (kakao) => {
+  try {
+    const response = await axios("https://kapi.kakao.com/v1/user/unlink", {
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${kakao}`,
+      },
     });
     console.log(response);
     return response;

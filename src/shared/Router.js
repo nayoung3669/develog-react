@@ -24,19 +24,24 @@ const Router = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const verify = async () => {
-      const res = await verifyUser();
-      if (res?.status === 200) {
-        dispatch(verifySuccess());
-        setIsLoggedIn(isAuth);
-      } else {
-        dispatch(verifyFailure());
-        setIsLoggedIn(isAuth);
-        console.log(isAuth);
-      }
+    // const verify = async () => {
+    //   const res = await verifyUser();
+    //   if (res?.status === 200) {
+    //     dispatch(verifySuccess());
+    //     setIsLoggedIn(isAuth);
+    //   } else {
+    //     dispatch(verifyFailure());
+    //     setIsLoggedIn(isAuth);
+    //     console.log(isAuth);
+    //   }
+    // };
+    // verify();
+    const verifySimple = () => {
+      setIsLoggedIn(isAuth);
+      console.log(isAuth);
     };
-    verify();
-  }, [isLoggedin]);
+    verifySimple();
+  }, [isAuth]);
 
   return (
     <BrowserRouter>
@@ -44,12 +49,12 @@ const Router = () => {
         <Route path="/kakao" element={<KakaoRedirect />} />
         <Route path="/naver" element={<NaverRedirect />} />
 
-        <Route element={<AuthRoutes isAuth={isAuth} />}>
+        <Route element={<AuthRoutes isAuth={isLoggedin} />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Route>
 
-        <Route element={<ProtectedRoutes isAuth={isAuth} />}>
+        <Route element={<ProtectedRoutes isAuth={isLoggedin} />}>
           <Route path="/home" element={<PostListPage />} />
           <Route path="/write" element={<WritePage />} />
           <Route path=":postId" element={<PostPage />} />
