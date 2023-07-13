@@ -40,7 +40,12 @@ export const naverLogin = async (naverCode) => {
 };
 
 //구글
+export const googleURL = () => {
+  return `${process.env.REACT_APP_GOOGLE_AUTH_URL}?response_type=code&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=http://localhost:3000/google`;
+};
+
 export const googleLogin = async (googleCode) => {
+  console.log(googleCode);
   try {
     const response = await axios("http://localhost:3001/googleLogin", {
       method: "post",

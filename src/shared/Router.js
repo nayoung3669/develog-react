@@ -16,11 +16,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { verifyUser } from "../api/Oauth";
 import KakaoRedirect from "../pages/Oauth/KakaoRedirect";
 import NaverRedirect from "../pages/Oauth/NaverRedirect";
+import GoogleRedirect from "../pages/Oauth/GoogleRedirect";
 
 const Router = () => {
-  const isAuth = useSelector(({ user }) => user.isLoggedIn);
-  const [isLoggedin, setIsLoggedIn] = useState(isAuth);
-
+  const isLoggedIn = useSelector(({ user }) => user.isLoggedIn);
+  const [isAuth, setIsAuth] = useState(isLoggedIn);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,24 +37,30 @@ const Router = () => {
     // };
     // verify();
     const verifySimple = () => {
-      setIsLoggedIn(isAuth);
-      console.log(isAuth);
+      if (isLoggedIn) {
+        dispatch(verifySuccess());
+        setIsAuth(true);
+      } else {
+        dispatch(verifyFailure());
+        setIsAuth(false);
+      }
     };
     verifySimple();
-  }, [isAuth]);
+  }, [isLoggedIn]);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/kakao" element={<KakaoRedirect />} />
         <Route path="/naver" element={<NaverRedirect />} />
+        <Route path="/google" element={<GoogleRedirect />} />
 
-        <Route element={<AuthRoutes isAuth={isLoggedin} />}>
+        <Route element={<AuthRoutes isAuth={isAuth} />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Route>
 
-        <Route element={<ProtectedRoutes isAuth={isLoggedin} />}>
+        <Route element={<ProtectedRoutes isAuth={isAuth} />}>
           <Route path="/home" element={<PostListPage />} />
           <Route path="/write" element={<WritePage />} />
           <Route path=":postId" element={<PostPage />} />
