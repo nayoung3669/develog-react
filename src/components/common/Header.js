@@ -4,6 +4,7 @@ import { Button } from "../../common";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { verifyFailure } from "../../redux/modules/user";
+import { verifyUser } from "../../api/Oauth";
 import { socialLogout } from "../../api/Oauth";
 
 const Header = () => {
@@ -14,15 +15,24 @@ const Header = () => {
     navigate("/home");
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     // signout();
-    socialLogout();
+    await socialLogout();
     dispatch(verifyFailure());
+
     alert("로그아웃 되었습니다.");
   };
 
-  const onClickWrite = () => {
-    navigate("/write");
+  const onClickWrite = async () => {
+    try {
+      const response = await verifyUser();
+      console.log(response);
+      navigate("/write");
+    } catch (e) {
+      console.log(e);
+      alert("다시 로그인 해주세요.");
+      navigate("/login");
+    }
   };
 
   return (

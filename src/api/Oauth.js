@@ -28,7 +28,7 @@ export const naverLogin = async (naverCode) => {
   try {
     const response = await axios("http://localhost:3001/naverLogin", {
       method: "post",
-      params: {
+      data: {
         code: naverCode,
       },
     });
@@ -72,8 +72,10 @@ export const socialLogout = async () => {
 export const verifyUser = async () => {
   try {
     const response = await axios("http://localhost:3001/usertoken", {
-      method: "post",
-      headers: localStorage.getItem("accessToken"),
+      method: "get",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     });
     console.log(response);
     return response;
